@@ -1,6 +1,6 @@
 <?php 
 
-$items = [];
+	$items = [];
 	// 'Get KAF yellow cake mix', 
 	// 'Get KAF chocolate cake mix - if it exists', 
 	// 'Get two boxes KAF yellow cake mix if chocolate is a figment of my imagination',
@@ -45,6 +45,7 @@ $items = [];
 	// if posted, add to array
 	if (isset($_GET['addtodo'])) {
 		$items[] = $_GET['addtodo'];
+
 		// then save changes to txt file
 		echo overwriteFile('todo_list/todo.txt', $items);
 	}
@@ -66,55 +67,49 @@ $items = [];
 <html>
 <head>
 	<title>To-do list, rainbow power</title>
-	<link rel="stylesheet" href="/css/todo2_style.css">
+	<link rel="stylesheet" href="/css/todo3_style.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 
 </head>
 <body>
-<div class="container">
-    <div clas="row">
-        <div class="col-md-4">
+	<div class="container">
 
-            <div class="red"></div>
+	<div class="row">
+
+		<div class="col-md-12">
+			<div class="red"></div>
 	
 			<div class="orange"></div>
-		
+				
 			<div class="yellow"></div>
-
+			
 			<div class="green"></div>
 			
 			<div class="blue"></div>
-			
+		
 			<div class="violet"></div>
-                  
-        </div>    
+		</div>	
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<h1>to-do list</h1>
+			<ul class="list">
+				<?php
+				foreach($items as $key => $value) {
+	           		echo "<li><a href=\"/todo_bootstrap_vertical.php?remove={$key}\">X</a> | {$value}</li>";
+	        		}
+				?>
+			</ul>
 
-        <div class="col-md-8">
-            <h1>to-do list</h1>
-				<form method="GET" action="/todo_bootstrap_vertical.php">
-					<label for="addtodo">new to-do:</label>
-					<input id="addtodo" name="addtodo" type="text" placeholder="your task here" />
-					<button class="button" name="submitlist" type="submit">do the thing!</button>
-			</form>
-                <ul class="list">
-					<?php
-						foreach($items as $key => $value) {
-	           				echo "<li><a href=\"/todo_bootstrap_vertical.php?remove={$key}\">X</a> | {$value}</li>";
-	        			}
-					?>
-				</ul>
-<!-- 
-				<form method="POST" action="http://requestb.in/xv3dbzxv">
-					<label for="addtodo">new to-do:</label>
-					<input id="addtodo" name="addtodo" type="text" placeholder="Enter list item here" />
-					<button class="button" name="submitlist" type="submit">Add to list!</button>
-			</form> -->
-        </div>
-    </div>
-    <div class="row">
-    	<div class"col-md-12">
-
-    	<?php
+		<form method="POST" action="http://requestb.in/xv3dbzxv">
+			<label for="addtodo">new to-do:</label>
+			<input id="addtodo" name="addtodo" type="text" placeholder="your task here" />
+			<button class="button" name="submitlist" type="submit">do the thing!</button>
+		</form>
+	<hr>
+		</div>
+		<div class="col-md-6">
+			<?php
 
 			print_r($_FILES);
 
@@ -137,11 +132,27 @@ $items = [];
 		    	// Create the saved filename using the file's original name and our upload directory
 		    	$savedFilename = $uploadDir . $filename;
 
-				if (file_exists($filename)) {
-			   		echo "The file $filename exists";
-				} else {
-			    	echo "The file $filename does not exist";
-				}
+				// if (file_exists($filename)) {
+			 //   		echo "The file $filename exists";
+				// } else {
+			 //    	echo "The file $filename does not exist";
+				// }
+
+				$itemsFromUpload = addFromFile($savedFilename);
+				
+				// MERGE WITH EXISTING $ITEMS ARRAY
+				// THEN SAVE IT
+
+				$items = array_merge($itemsFromUpload, $items);
+				var_dump($items);
+
+
+				// if posted, add to array
+				// if (isset($_FILES['file1'])) {
+					// $items[] = $_FILES['file1'];
+					// then save changes to txt file
+				echo overwriteFile(, $items);
+				// }
 
 			    // Move the file from the temp location to our uploads directory
 			    // move_uploaded_file(move from ['here'], to here);
@@ -154,23 +165,24 @@ $items = [];
 			    echo "<p>You can download your file <a href='/uploads/{$filename}'>here</a>.</p>";
 			}
 
+
+   		
+	
+
 		?>
 
-		<h2>Upload File</h2>
+		<h1>upload new file</h1>
 
-	   <form method="POST" enctype="multipart/form-data" action="/todo_bootstrap_vertical.php">
+	   <form method="POST" enctype="multipart/form-data" action="/todo_bootstrap_horizontal.php">
 	        <p>
-	            <label for="file1">File to upload: </label>
+	            <label for="file1"> select file: </label>
 	            <input type="file" id="file1" name="file1">
 	        </p>
 	        <p>
-	            <input type="submit" value="Upload">
+	            <input type="submit" value="upload">
 	        </p>
    		</form>	
 
-    	</div>
-    </div>
-</div>
-
+	</div>
 </body>
 </html>

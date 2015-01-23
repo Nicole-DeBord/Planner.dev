@@ -1,0 +1,91 @@
+
+/*.arrow {
+    position: relative;
+    top: -90;
+    right: -40;
+}
+
+.ribbon {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}*/
+
+.list {
+    list-style: none;
+}
+
+label {
+    font-size: 1.5em;
+    padding-right: 10px;
+}
+
+button {
+    margin-left: 20px;
+}
+
+.red {
+    border: 2px solid #FFF;
+    height: 50px;
+    /*width: 12%;*/
+    padding: 10px;
+    margin-top: 15px;
+    background-color: #FF0000;
+    color: #FFF;
+    /*float: left*/
+}
+
+.orange {
+    border: 2px solid #FFF;
+    height: 50px;
+    /*width: 12%;*/
+    padding: 10px;
+    margin-top: 15px;
+    background-color: #FF6600;
+    color: #FFF;
+    /*float: left;*/
+}
+
+.yellow {
+    border: 2px solid #FFF;
+    height: 50px;
+    /*width: 12%;*/
+    padding: 10px;
+    margin-top: 15px;
+    background-color: #FFCC00;
+    color: #FFF;
+ /*   float: left;*/
+}
+
+.green {
+    border: 2px solid #FFF;
+    height: 50px;
+  /*  width: 12%;*/
+    padding: 10px;
+    margin-top: 15px;
+    background-color: #33CC33;
+    color: #FFF;
+    /*float: left;*/
+}
+
+.blue {
+    border: 2px solid #FFF;
+    height: 50px;
+   /* width: 12%;*/
+    padding: 10px;
+    margin-top: 15px;
+    background-color: #0066FF;
+    color: #FFF;
+    /*float: left;*/
+}
+
+.violet {
+    border: 2px solid #FFF;
+    height: 50px;
+ /*   width: 12%;*/
+    padding: 10px;
+    margin-top: 15px;
+    background-color: #CC00CC;
+    color: #FFF;
+   /* float: left;*/
+}

@@ -1,0 +1,83 @@
+/* This CSS stylesheet is gonna make my todo-list fab 'n' fancy */
+
+#box {
+opacity: 100;
+position: absolute;
+left: 0;
+bottom: 0;
+width: 660px;
+height: 280px;
+}
+
+#container {
+	background-color: #FFF;
+	height: 200px;
+	clear:left;
+	margin-left: 50px;
+	margin-right: 50px;
+	margin-top: 20px;
+	padding: 10px;
+	width: 600px;
+}
+
+.font {
+	color: #D11963;
+}
+
+.form {
+	float: left;
+	text-align: right;
+	margin-right: 15px;
+	width: 100px;
+}
+
+.float {
+margin-top: 12px;
+margin-bottom: 12px;
+margin-left: 5px;
+padding: 2px;
+width: 115px;
+line-height: 1.1em;
+color: #fff;
+background: #D11963;
+float: left;
+clear: left;
+text-align: center;
+}
+
+body {
+	background-image: url('/css/imgs/swirl_pattern.png');
+	background-repeat:repeat;
+}
+
+.button {
+   border-top: 1px solid #cccccc;
+   background: #f005a2;
+   background: -webkit-gradient(linear, left top, left bottom, from(#de0068), to(#f005a2));
+   background: -webkit-linear-gradient(top, #de0068, #f005a2);
+   background: -moz-linear-gradient(top, #de0068, #f005a2);
+   background: -ms-linear-gradient(top, #de0068, #f005a2);
+   background: -o-linear-gradient(top, #de0068, #f005a2);
+   padding: 10.5px 21px;
+   -webkit-border-radius: 8px;
+   -moz-border-radius: 8px;
+   border-radius: 8px;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   box-shadow: rgba(0,0,0,1) 0 1px 0;
+   text-shadow: rgba(0,0,0,.4) 0 1px 0;
+   color: white;
+   font-size: 14px;
+   font-family: 'Lucida Grande', Helvetica, Arial, Sans-Serif;
+   text-decoration: none;
+   vertical-align: middle;
+   }
+.button:hover {
+   border-top-color: #e6007b;
+   background: #e6007b;
+   color: #ccc;
+   }
+.button:active {
+   border-top-color: #bf65b2;
+   background: #bf65b2;
+   }

@@ -1,11 +1,13 @@
+<!DOCTYPE html>
 <html>
 <head>
 	<title>I am to-do list</title>
+	<link rel="stylesheet" href="/css/todo_style.css">
 </head>
 <body>
-<h1>To-do List</h1>
-<p>
-	<ol>
+<h1 class="float">To-do List</h1>
+<div id="container">
+	<ul>
 		<li>Get KAF yellow cake mix</li>
 		<li>Get KAF chocolate cake mix - if it exists</li>
 		<li>Get two boxes KAF yellow cake mix if chocolate is a figment of my imagination</li>
@@ -15,14 +17,15 @@
 		<li>Get 1 large bag icing sugar</li>
 		<li>Get blue food coloring, preferably with glitter, OR</li>
 		<li>Find some way to make cupcakes literary themed - I know, challenging</li>
-	</ol>
+	</ul>
+</div>
 <form method="POST" action="http://requestb.in/xv3dbzxv">
 	<p>
 		<label for="addtodo">New to-do item:</label>
-		<input id="addtodo" name="addtodo" type="text" placeholder="Enter list item here">
+		<input id="addtodo" name="addtodo" type="text" placeholder="Enter list item here" />
 	</p>
 	<p>
-		<button name="submitlist" type="submit">Add to list!</button>
+		<button class="button" name="submitlist" type="submit">Add to list!</button>
 	</p>
 </form>
 </body>
