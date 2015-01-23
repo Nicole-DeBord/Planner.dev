@@ -21,7 +21,7 @@ $addressBookData = new AddressDataStore('address_book.csv');
 $addressBook = $addressBookData->openCSV();
 
 if (!empty($_POST)) {
-	var_dump($_POST);
+
 
 	if (!empty($_POST['name']) && !empty($_POST['address']) && 
 		!empty($_POST['city']) && !empty($_POST['state']) && 
@@ -34,10 +34,6 @@ if (!empty($_POST)) {
 		$showAlert = true;
 	}
 }
-
-var_dump($showAlert);
-
-var_dump($addressBook);
 
 
 	if (isset($_GET['delete'])) {
@@ -111,7 +107,7 @@ var_dump($addressBook);
 						<? foreach ($row as $value): ?>
 							<td><?= $value;?></td>
 						<? endforeach; ?>
-							<td><a href="address_book2.php?delete=<?=$key?>" class="btn btn-danger"><i class="icon-white icon-remove-circle"></i> Delete</a></td>
+							<td><a href="address_book3.php?delete=<?=$key?>" class="btn btn-danger"><i class="icon-white icon-remove-circle"></i> Delete</a></td>
 						</tr>
 					<? endforeach; ?>
 				</table>
@@ -123,7 +119,7 @@ var_dump($addressBook);
 				<br>
 				<h1>Add Contacts From File</h1>
 				<br>
-				<form method="POST" enctype="multipart/form-data" action="address_book2.php">
+				<form method="POST" enctype="multipart/form-data" action="address_book3.php">
 		        	<div class="form-group">
 			            <label for="file1">Upload New Contact File: </label>
 			            <input type="file" id="file1" name="file1">
@@ -141,7 +137,7 @@ var_dump($addressBook);
 				<br>
 				<h1>Add New Contact</h1>
 				<br>
-				<form role="form" method="POST" action="address_book2.php">
+				<form role="form" method="POST" action="address_book3.php">
 
 					<div class="form-group">
 					<label for="name">Name:   </label>

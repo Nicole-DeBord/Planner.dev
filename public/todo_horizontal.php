@@ -82,8 +82,8 @@ require_once '../inc/filestore.php';
 <html>
 <head>
 	<title>To-do list, rainbow power</title>
-	<link rel="stylesheet" href="/css/todo3_style.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/todo3_style.css">
 
 </head>
 <body>
