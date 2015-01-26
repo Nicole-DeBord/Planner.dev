@@ -12,16 +12,17 @@ require_once '../inc/filestore.php';
 	}
 
 	$todoListData = new TodoDataStore('todo_list/todo.txt');
-	$todoListData->items = $todoListData->addFromFile();
+	$todoListData->items = $todoListData->read();
+	var_dump($todoListData->items);
 
-	// $items = addFromFile('todo_list/todo.txt');
+	// $items = read('todo_list/todo.txt');
 
 
 	// if posted, add to array
 	if (isset($_GET['addtodo'])) {
 		$todoListData->items[] = htmlentities(strip_tags($_GET['addtodo']));
 		// then save changes to txt file
-		echo $todoListData->overwriteFile($todoListData->items);
+		echo $todoListData->write($todoListData->items);
 	}
 
 	// if get 'remove', and we do get it because we hard-coded this query string
@@ -33,7 +34,7 @@ require_once '../inc/filestore.php';
 
 		$todoListData->items = array_values($todoListData->items);
 		// then save changes to txt file
-		echo $todoListData->overwriteFile($todoListData->items);
+		echo $todoListData->write($todoListData->items);
 	}
 
 		// Verify there were uploaded files and no errors using the UPLOAD_ERR_OK constant
@@ -67,13 +68,13 @@ require_once '../inc/filestore.php';
 		    // move_uploaded_file(move from ['here'], to here);
 		    move_uploaded_file($_FILES['file1']['tmp_name'], $savedFilename);
 		
-			$itemsFromUpload = $todoListData->addFromFile($savedFilename);
+			$itemsFromUpload = $todoListData->read($savedFilename);
 			
 			// MERGE WITH EXISTING $ITEMS ARRAY
 			// THEN SAVE IT
 			$todoListData->items = array_merge_recursive($todoListData->items, $itemsFromUpload);
 
-			$todoListData->overwriteFile($todoListData->items);
+			$todoListData->write($todoListData->items);
 		}
 	}
 
@@ -114,6 +115,7 @@ require_once '../inc/filestore.php';
 			</form>
                 <ul class="list">
 					<?php
+
 						foreach($todoListData->items as $key => $value) {
 	           				echo "<li><a href=\"/todo_horizontal.php?remove={$key}\">X</a> | {$value}</li>";
 	        			}

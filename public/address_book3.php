@@ -18,7 +18,7 @@ function sanitize($array) {
 }
 
 $addressBookData = new AddressDataStore('address_book.csv');
-$addressBook = $addressBookData->openCSV();
+$addressBook = $addressBookData->read();
 
 if (!empty($_POST)) {
 
@@ -28,7 +28,7 @@ if (!empty($_POST)) {
 		!empty($_POST['zip']) && !empty($_POST['phone'])) {
 		$sanitizedPOST = sanitize($_POST);
 		array_push($addressBook, $sanitizedPOST);
-		$addressBookData->saveCSV($addressBook);
+		$addressBookData->write($addressBook);
 
 	} else {
 		$showAlert = true;
@@ -44,7 +44,7 @@ if (!empty($_POST)) {
 
 		$addressBook = array_values($addressBook);
 		// then save changes to txt file
-		$addressBookData->saveCSV($addressBook);
+		$addressBookData->write($addressBook);
 	}
 
 
@@ -65,7 +65,7 @@ if (!empty($_POST)) {
 	    move_uploaded_file($_FILES['file1']['tmp_name'], $savedFilename);
 
 		$addressBookDataNew = new AddressDataStore($savedFilename);
-		$itemsFromUpload = $addressBookDataNew->openCSV();
+		$itemsFromUpload = $addressBookDataNew->read();
 		} else {
 			echo 'There was an error processing this file.';
 		}
@@ -74,7 +74,7 @@ if (!empty($_POST)) {
 		// THEN SAVE IT
 		$addressBook = array_merge_recursive($addressBook, $itemsFromUpload);
 
-		$addressBookData->saveCSV($addressBook);
+		$addressBookData->write($addressBook);
 	}
 
 ?>
