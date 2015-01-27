@@ -7,25 +7,22 @@ define('DB_PASS', 'codeup');
 
 require('db_connect.php');
 
-require('address_class.php');
+require('contacts_class.php');
 
 var_dump($_POST);
 
-$address = new Address($dbc);
+$person = new People($dbc);
 
-if (!empty($_POST['street']) && 
-	!empty($_POST['city']) && 
-	!empty($_POST['state']) && 
-	!empty($_POST['zip'])) {
+if (!empty($_POST['fname']) && 
+	!empty($_POST['lname']) && 
+	!empty($_POST['phone'])) {
 
-	$address->streetAdd = htmlspecialchars(strip_tags($_POST['street']));
-	$address->aptAdd = htmlspecialchars(strip_tags($_POST['apt']));
-	$address->cityAdd = htmlspecialchars(strip_tags($_POST['city']));
-	$address->stateAdd = htmlspecialchars(strip_tags($_POST['state']));
-	$address->zipAdd = htmlspecialchars(strip_tags($_POST['zip']));
-	$address->fourAdd = htmlspecialchars(strip_tags($_POST['four']));
+	$person->fnameAdd = htmlspecialchars(strip_tags($_POST['fname']));
+	$person->lnameAdd = htmlspecialchars(strip_tags($_POST['lname']));
+	$person->phoneAdd = htmlspecialchars(strip_tags($_POST['phone']));
 
-	$address->insert();
+
+	$person->insert();
 
 }
 
@@ -33,7 +30,7 @@ if (!empty($_POST['street']) &&
 
 $offset = 0;
 
-$stmt = $dbc->prepare('SELECT street, apt, city, state, zip, plus_four FROM address LIMIT 10 OFFSET :offset');
+$stmt = $dbc->prepare('SELECT first_name, last_name, phone FROM people LIMIT 10 OFFSET :offset');
 $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
 $stmt->execute();
 $stmts = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -50,16 +47,13 @@ $stmts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<h1>Addresses</h1>
+				<h1>Contacts</h1>
 				<table class="table">
 					<thead>
 					<tr>
-						<th>Street</th>
-						<th>Apt #</th>
-						<th>City</th>
-						<th>State</th>
-						<th>Zip</th>
-						<th>+ 4</th>
+						<th>First Name:</th>
+						<th>Last Name:</th>
+						<th>Phone:</th>
 					</tr>
 				</thead>
 
@@ -76,7 +70,7 @@ $stmts = $stmt->fetchAll(PDO::FETCH_ASSOC);
                	</td>
             	<?php endforeach ?>
             	<td>
-                <a href="/addresses.php?remove=<?= $key ?>" class="btn btn-default btn-danger btn-center">X</a>
+                <a href="/address_book_db.php?remove=<?= $key ?>" class="btn btn-default btn-danger btn-center">X</a>
            		</td>
         		</tr>
         		<?php endforeach ?>
@@ -109,43 +103,30 @@ $stmts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		<div class="row">
 			<div class="col-md-12">
 				<br>
-				<h1>Add New Address</h1>
+				<h1>Add New Contact</h1>
 				<br>
-				<form role="form" method="POST" action="addresses.php">
+				<form role="form" method="POST" action="address_book_db.php">
 
 				<div class="form-group">
-					<label for="street">Street:</label>
-					<input id="street" name="street" class="form-control" type="text" placeholder="your address here" />
+					<label for="fname">First Name:</label>
+					<input id="fname" name="fname" class="form-control" type="text" placeholder="Enter first name" />
 					</div>
 
 					<div class="form-group">
-					<label for="apt">Apt Number:</label>
-					<input id="apt" name="apt" class="form-control" type="text" placeholder="your city here" />
+					<label for="lname">Last Name:</label>
+					<input id="lname" name="lname" class="form-control" type="text" placeholder="Enter last name" />
 					</div>
 
 					<div class="form-group">
-					<label for="city">City:</label>
-					<input id="city" name="city" class="form-control" type="text" placeholder="your state here" />
-					</div>
-
-					<div class="form-group">
-					<label for="state">State:</label>
-					<input id="state" name="state" class="form-control" type="text" placeholder="your zip code here" />
-					</div>
-
-					<div class="form-group">
-					<label for="zip">Zip:</label>
-					<input id="zip" name="zip" class="form-control" type="text" placeholder="your zip code here" />
-					</div>
-
-					<div class="form-group">
-					<label for="four">Plus Four:</label>
-					<input id="four" name="four" class="form-control" type="text" placeholder="last four digits here" />
+					<label for="phone">Phone Number:</label>
+					<input id="phone" name="phone" class="form-control" type="text" placeholder="Enter 10 digit phone number"/>
 					</div>
 
 					<div class="form-group">
 					<button class="button" type="submit">submit</button>
 				    </div>
+
+					</div>
 			</form>		
 			</div>
 		</div>
