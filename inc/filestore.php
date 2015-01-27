@@ -6,14 +6,30 @@ class Filestore
 
     public $filename;
 
-    function __construct($input) {
-        $this->filename = $input;
+    protected $isCSV = false;
+    protected $isTXT = false;
+
+    function __construct($filename) {
+        $this->filename = $filename;
+
+        if (!file_exists($filename)) {
+          touch($filename);
+        }
+
+        if (substr($filename, -3) == 'csv') {
+          $this->isCSV = true;
+        }
+
+        if (substr($filename, -3) == 'txt') {
+          $this->isTXT = true;
+        }
+
     }
 
      /**
       * Returns array of lines in $this->filename
       */
-    function addFromFile() {
+    protected function readLines() {
         $contentsArray = []; 
         if(filesize($this->filename) > 0) {   
             $handle = fopen($this->filename, 'r');
@@ -27,7 +43,7 @@ class Filestore
      /**
       * Writes each element in $array to a new line in $this->filename
       */
-    function overwriteFile($items) {
+    protected function writeLines($items) {
         $handle = fopen($this->filename, 'w');
         foreach($items as $item) {
             fwrite($handle, $item . PHP_EOL);
@@ -38,7 +54,7 @@ class Filestore
      /**
       * Reads contents of csv $this->filename, returns an array
       */
-    public function openCSV() {
+    protected function readCSV() {
         $handle = fopen($this->filename, 'r');
         $array = [];
         while(!feof($handle)) {
@@ -55,11 +71,35 @@ class Filestore
      /**
       * Writes contents of $array to csv $this->filename
       */
-  public function saveCSV ($array) {
+  protected function writeCSV ($array) {
     $handle = fopen($this->filename, 'w');
     foreach ($array as $row) {
       fputcsv($handle, $row);
       }
     fclose($handle);
   }
+
+
+    public function read() {
+      if($this->isCSV == true) {
+        return $this->readCSV();
+      }
+
+      if($this->isTXT == true) {
+        return $this->readLines();
+      }
+    }
+
+
+    public function write($array) {
+      if($this->isCSV == true) {
+        return $this->writeCSV($array);
+      }
+
+      elseif($this->isTXT == true) {
+        return $this->writeLines($array);
+      }
+    }
+
+
 }

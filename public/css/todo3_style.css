@@ -16,9 +16,8 @@ label {
 
 .list {
     list-style: none;
-    height: 50px;
+    min-height: 50px;
 }
-
 
 .red {
     border: 2px solid #FFF;
