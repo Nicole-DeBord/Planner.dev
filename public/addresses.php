@@ -7,10 +7,27 @@ define('DB_PASS', 'codeup');
 
 require('db_connect.php');
 
+require('address_model.php');
 
+var_dump($_POST);
 
+$address = new Address($dbc);
 
+if (!empty($_POST['street']) && 
+	!empty($_POST['city']) && 
+	!empty($_POST['state']) && 
+	!empty($_POST['zip'])) {
 
+	$address->streetAdd = htmlspecialchars(strip_tags($_POST['street']));
+	$address->aptAdd = htmlspecialchars(strip_tags($_POST['apt']));
+	$address->cityAdd = htmlspecialchars(strip_tags($_POST['city']));
+	$address->stateAdd = htmlspecialchars(strip_tags($_POST['state']));
+	$address->zipAdd = htmlspecialchars(strip_tags($_POST['zip']));
+	$address->fourAdd = htmlspecialchars(strip_tags($_POST['four']));
+
+	$address->insert();
+
+}
 
 
 
@@ -57,10 +74,10 @@ require('db_connect.php');
 				<br>
 				<h1>Add New Address</h1>
 				<br>
-				<form role="form" method="POST" action="address_book_db.php">
+				<form role="form" method="POST" action="addresses.php">
 
 				<div class="form-group">
-					<label for="street">Street Name:</label>
+					<label for="street">Street:</label>
 					<input id="street" name="street" class="form-control" type="text" placeholder="your address here" />
 					</div>
 

@@ -1,5 +1,6 @@
 <?php
 
+
 class Model {
 
 	protected $dbc;
@@ -13,11 +14,9 @@ class Model {
 		if (isset($this->id)) {
 			return $this->update();
 		} else {
-			return $this->$insert();
+			return $this->insert();
 		}
 	}
 }
 
 
-
-?>
